@@ -27,7 +27,7 @@
         @Not Null(message = "(student.country.not present}")
         private String interestedCountry;
 
-        @NotNull(message = "{student. intakeyear.notpresent)")
+        @NotNull(message = "{student.intakeyear.notpresent)")
         private Integer intakeYear;
         
         @Not Null(message = "{student.studylevel.notpresent}")
