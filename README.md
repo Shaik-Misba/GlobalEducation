@@ -91,25 +91,55 @@
 		@Autowored
 		private Student Repository student Repository;
 
-public Student DTO registerStudent (Student DTO student DTO) throws GlobalEducationException { Student Validator.validate Student (student DTO);
+		public Student DTO registerStudent (Student DTO student DTO) throws GlobalEducationException { 
+  			Student Validator.validate Student (student DTO);
+			Optional<*Student> op=student Repository.findByEmailId(studentDTO.getEmailId()); 
+   			if(op.isPresent()) {
+      				throw new Global EducationException("Student Service. STUDENT_ALREADY_EXISTS");
+			}
+   			Student st=new Student();
+      			st=Student DTO.prepareEntity(student DTO);
+			Student snew-student Repository.save(st);
+			st.setStudent Id (snew.get StudentId()); Student DTO sdt o=Student DTO.prepareDTO(st);
+			return sdto;
+		}
+		public List<*Student DTO> get StudentByCountryAndIntake(String country, Integer intakeYear){
+  			List<*Student> slist=studentRepository.findByInterestedCountryAndIntakeYear(country,intakeYear);
+     			if(slist.isEmpty()){
+				thow new GlobalEducationException("StudentService.NO_STUDENTS_FOUND");
+    			}
+       			List<*StudentDTO> dlist=new ArrayList<*StudentDTO>();
+	  		for(Student student:slist) {
+     				StudentDTO sdto=StudnetDTO.prepareDTO(student);
+	 			dlist.add(sdto);
+     			}
+			Collections.sort(dlist.Comparator.comparing(StudentDTO::getStudentName));
+   			return dlist;
+      		}
+     	}			
+</code></p>
 
-Optional<Student> op=student Repository.findByEmailId(studentDTO.getEmailId()); if(op.isPresent()) {
+**ExceptionHandlerAdvice.java**
+<p><code>
+	@RestControllerAdvice
+	public class ExceptionControllerAdvice{
+		private static final log-------->
+	
+		@Autowired
+  		private Environment environment;
+    		@ExceptionHandler(globalEducationException.class)
+      		public ResponseEntity<*ErrorInfo> globalEducationExceptionHandler(GlobalEducationException-){
+			------------
+		}
 
-}
+  		@exceptionHandler(Exception.class)
+    		public ResponseEntity<*ErrorInfo> generalExceptionHnadler(Exception -){
+      			-------
+	 	}
 
-throw new Global EducationException("Student Service. STUDENT_ALREADY_EXISTS");
-
-Student st=new Student();
-
-st=Student DTO.prepareEntity(student DTO);
-
-Student snew-student Repository.save(st);
-
-st.setStudent Id (snew.get StudentId()); Student DTO sdt o=Student DTO.prepareDTO(st);
-
-return sdto;
-
-}
-
-public List<Student DTO> get Student By Country AndIntake (String country, Integer intakeYear) th
+   		@exceptionHandler({MathosArgumentNotValidException.class, ConstraintViolationException.class})
+     		public ResponseEntity<*ErrorInfo> validatorExceptionHandler(Exception exception){
+       			------------
+	  	}
+    }
 </code></p>
