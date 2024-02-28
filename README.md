@@ -89,5 +89,27 @@
 	@Transactional
 	public class StudentServiceImpl{
 		@Autowored
-		
+		private Student Repository student Repository;
+
+public Student DTO registerStudent (Student DTO student DTO) throws GlobalEducationException { Student Validator.validate Student (student DTO);
+
+Optional<Student> op=student Repository.findByEmailId(studentDTO.getEmailId()); if(op.isPresent()) {
+
+}
+
+throw new Global EducationException("Student Service. STUDENT_ALREADY_EXISTS");
+
+Student st=new Student();
+
+st=Student DTO.prepareEntity(student DTO);
+
+Student snew-student Repository.save(st);
+
+st.setStudent Id (snew.get StudentId()); Student DTO sdt o=Student DTO.prepareDTO(st);
+
+return sdto;
+
+}
+
+public List<Student DTO> get Student By Country AndIntake (String country, Integer intakeYear) th
 </code></p>
