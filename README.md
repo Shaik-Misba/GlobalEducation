@@ -75,10 +75,14 @@
 
  		@PostMapping(value="student")
    		public ResponseEntity<*StudentDTO> registerStudent(---------------) {
+     			StudentDTO sdto = studnetService.registerStudnet(StudentDTO);
+			return new ResponseEntity<>(sdto, HttpStatus.CREATED);
 		}
 
 		@GetMapping(value="student/{country]/{intakeYear}")
   		public ResponseEntity<*List<*StudentDTO>> getStudentByCountryAndIntake(-----------){
+    			List<StudentDTO> list = studentService.getStudentByCountryAndIntake(country,intakeYear);
+       			return new ResponseEntity<>(list,HttpStatuse.OK);
 		}
   }
 </code></p>
